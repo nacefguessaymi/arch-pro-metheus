@@ -1,4 +1,4 @@
-#Matebook X Pro Arch Install
+<h1 align="center">Matebook X Pro Arch Install</h1>
 
 In 2019 I bought a [Matebook X Pro](https://en.wikipedia.org/wiki/Huawei_MateBook_X_Pro).
 This was a pretty good system, however, after all the years, this computer became really slow due to a bloated windows instance.
