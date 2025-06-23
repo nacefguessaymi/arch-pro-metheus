@@ -1,7 +1,7 @@
 <h1 align="center">Matebook X Pro Arch Install</h1>
 
 In 2019 I bought a [Matebook X Pro](https://en.wikipedia.org/wiki/Huawei_MateBook_X_Pro).
-This was a pretty good system, however, after all the years, this computer became really slow due to a bloated windows instance.
+This was a pretty good system, however, after all the years, this computer became really slow due to a bloated windows.
 It became pretty much unusable, with about a 5 minute boot time, and almost 30 minutes startup time (time that it takes to actually start using the system).
 This became very frustrating to deal with and I migrated to a new laptop (Macbook Pro). 
 As a fun personal project, I decided to install Arch Linux on this laptop to see if it would fix these issues and revive this laptop.
