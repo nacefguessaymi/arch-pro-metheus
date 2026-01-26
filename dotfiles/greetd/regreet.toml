@@ -1,0 +1,8 @@
+[commands]
+reboot = [ "systemctl", "reboot" ]
+poweroff = [ "systemctl", "poweroff" ]
+[background]
+path = "/etc/greetd/lock_screen.png"
+fit = "Cover"
+[appearance]
+greeting_msg = "Lock in"
