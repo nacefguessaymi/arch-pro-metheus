@@ -1,0 +1,60 @@
+
+[[language]]
+name = "python"
+language-id = "python"
+file-types = ["py"]
+roots = [".", "pixi.toml", "setup.py", "pyproject.toml", "setup.py"]
+auto-format = true
+language-servers = [ "basedpyright", "ruff" ]
+formatter = { command = "ruff", args = ["format", "-"] }
+
+[language-server.basedpyright]
+command = "basedpyright-langserver"
+args = ["--stdio"]
+except-features = ["format", "code-action"]
+
+[language-server.basedpyright.config.basedpyright.analysis]
+autoSearchPaths = true
+typeCheckingMode = "basic"
+diagnosticMode = "openFilesOnly"
+
+[language-server.ruff]
+command = "ruff"
+args = ["server", "--preview"]
+
+[[language]]
+name = "rust"
+language-id = "rust"
+
+[[language]]
+name = "markdown"
+language-id = "markdown"
+language-servers = ["marksman"]
+
+[[language]]
+name = "typst"
+language-servers = ["tinymist"]
+
+[[language]]
+name = "bash"
+
+[[language]]
+name = "bibtex"
+
+[[language]]
+name = "html"
+
+[[language]]
+name = "javascript"
+
+[[language]]
+name = "typescript"
+
+[[language]]
+name = "mojo"
+
+[[language]]
+name = "latex"
+
+[[language]]
+name = "yaml"

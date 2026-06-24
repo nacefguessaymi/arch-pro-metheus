@@ -160,6 +160,6 @@ fastfetch
 eval "$(starship init bash)"
 export PATH="/home/nacef/.pixi/bin:$PATH"
 eval "$(ssh-agent -s)" > /dev/null
-for key in ~/.ssh/*; do
+for key in ~/.ssh/keys/*; do
   [[ "$key" != *pub ]] && ssh-add "$key"
 done

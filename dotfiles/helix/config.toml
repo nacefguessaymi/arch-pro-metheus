@@ -1,0 +1,5 @@
+theme = "gruvbox"
+
+[editor]
+clipboard-provider = "wayland"
+
