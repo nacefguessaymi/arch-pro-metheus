@@ -163,3 +163,4 @@ eval "$(ssh-agent -s)" > /dev/null
 for key in ~/.ssh/keys/*; do
   [[ "$key" != *pub ]] && ssh-add "$key"
 done
+export PATH="$HOME/.local/bin:$PATH"
