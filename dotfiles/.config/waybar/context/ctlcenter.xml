@@ -92,7 +92,7 @@
 
     <child>
       <object class="GtkMenuItem" id="action-4">
-        <property name="label">Inhibit</property>
+        <property name="label">Power</property>
         <child type="submenu">
             <object class="GtkMenu">
                 <child>
@@ -103,9 +103,21 @@
 
                 <child>
                     <object class="GtkMenuItem" id="action-4-2">
-                        <property name="label">Lid</property>
+                        <property name="label">Reboot</property>
                     </object>
                 </child>
+            
+                <child>
+                    <object class="GtkMenuItem" id="action-4-3">
+                        <property name="label">Sleep</property>
+                    </object>
+                </child>
+
+                <child>
+                    <object class="GtkMenuItem" id="action-4-4">
+                        <property name="label">Hibernate</property>
+                    </object>
+                </child>            
             </object>
         </child>
 

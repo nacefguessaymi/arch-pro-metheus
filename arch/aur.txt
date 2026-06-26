@@ -1,8 +1,10 @@
-brave-bin
-nvidia-580xx-dkms
-nvidia-580xx-utils
-peaclock
-singularity-ce
-singularity-ce-debug
-yay
-yay-debug
+brave-bin 1:1.91.175-1
+nvidia-580xx-dkms 580.159.04-1
+nvidia-580xx-utils 580.159.04-1
+peaclock 0.4.3-2
+singularity-ce 4.3.7-1
+singularity-ce-debug 4.3.7-1
+vscodium-bin 1.121.03429-1
+yay 12.5.7-1
+yay-debug 12.5.7-1
+zoom 7.1.0-1

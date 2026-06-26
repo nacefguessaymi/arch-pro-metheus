@@ -12,18 +12,6 @@
          }
     },
 
-    "niri/workspaces": {
-        "format": "{icon}",
-        "cursor" : true,
-        "on-scroll-up": "niri msg action focus-workspace-up",
-        "on-scroll-down": "niri msg action focus-workspace-down",
-        "hide-empty": true,
-        "format-icons": {
-            "active": "󰮯",
-            "default": "",
-            "empty": ""
-        }
-    },
 
     "hyprland/window" : {
         "max-length": 45
@@ -222,11 +210,13 @@
 
 
             "action-3-1": "~/.local/bin/refreshrate 60",
-  			"action-3-2": "~/.local/bin/refreshrate 90",
-  			"action-3-3": "~/.local/bin/refreshrate 144",
+      			"action-3-2": "~/.local/bin/refreshrate 90",
+      			"action-3-3": "~/.local/bin/refreshrate 144",
 
-            "action-4-1": "~/.local/bin/caffeine shutdown",
-            "action-4-2": "~/.local/bin/caffeine handle-lid-switch",
+            "action-4-1": "systemctl poweroff",
+            "action-4-2": "reboot",
+            "action-4-3": "systemctl suspend",
+            "action-4-4": "systemctl hibernate",
 
             "action-5": "~/.local/bin/powersafe",
             "action-6": "killall waybar; waybar &"
