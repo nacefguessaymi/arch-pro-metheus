@@ -19,7 +19,14 @@ local menu = "wofi --show drun"
 -- MONITORS ---
 ---------------
 hl.monitor({output = "eDP-1", mode = "3000x2000", position = "0x0", scale = 2})
-hl.monitor({output = "DP-1", mode = "3008x1695", position = "1500x0", scale = 1})
+
+--- HOME SCREEN ---
+--hl.monitor({output = "DP-1", mode = "3008x1695", position = "1500x0", scale = 1})
+
+--- WORK PEN SCREEN ---
+hl.monitor({ output = "desc:ASUSTek COMPUTER INC VP327Q", mode = "2560x1440@59.95", position = "-2560x0", scale = 1 })
+
+--- FALLBACK ---
 hl.monitor({output = "", mode = "preferred", position = "auto", scale = "auto"})
 
 
@@ -368,3 +375,6 @@ hl.on(
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
   end
 )
+hl.on("monitor.removed", function()
+    hl.exec_cmd("pkill waybar; sleep 0.5; waybar")
+end)
