@@ -214,9 +214,10 @@
       			"action-3-3": "~/.local/bin/refreshrate 144",
 
             "action-4-1": "systemctl poweroff",
-            "action-4-2": "reboot",
+            "action-4-2": "systemctl reboot",
             "action-4-3": "systemctl suspend",
             "action-4-4": "systemctl hibernate",
+            "action-4-5": "hyprlock",
 
             "action-5": "~/.local/bin/powersafe",
             "action-6": "killall waybar; waybar &"
