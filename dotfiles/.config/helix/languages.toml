@@ -27,6 +27,13 @@ name = "rust"
 language-id = "rust"
 
 [[language]]
+name = "lua"
+language-servers = ["lua-language-server"]
+
+[language-server.lua-language-servr]
+command = "lua-language-server"
+
+[[language]]
 name = "markdown"
 language-id = "markdown"
 language-servers = ["marksman"]
