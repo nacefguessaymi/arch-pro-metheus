@@ -20,11 +20,11 @@ local menu = "wofi --show drun"
 ---------------
 hl.monitor({output = "eDP-1", mode = "3000x2000", position = "0x0", scale = 2})
 
---- HOME SCREEN ---
---hl.monitor({output = "DP-1", mode = "3008x1695", position = "1500x0", scale = 1})
-
 --- WORK PEN SCREEN ---
-hl.monitor({ output = "desc:ASUSTek COMPUTER INC VP327Q", mode = "2560x1440@59.95", position = "-2560x0", scale = 1 })
+hl.monitor({output = "desc:ASUSTek COMPUTER INC VP327Q", mode = "2560x1440@59.95", position = "-2560x0", scale = 1 })
+
+--- HOME MONITOR ---
+hl.monitor({output = "desc:ASUSTek COMPUTER INC PA32QCV T7LMSV00900", mode = "3008x1692@59.96700", position = "1500x0", scale = 1})
 
 --- FALLBACK ---
 hl.monitor({output = "", mode = "preferred", position = "auto", scale = "auto"})
@@ -90,6 +90,7 @@ hl.config({
     kb_layout = "us",
     follow_mouse = 1,
     sensitivity = 0.65,
+    natural_scroll = true,
     touchpad = {
       natural_scroll = true,
     },
@@ -271,6 +272,12 @@ hl.bind(mainMod .. " + right", hl.dsp.focus({direction = "right"}))
 hl.bind(mainMod .. " + up", hl.dsp.focus({direction = "up"}))
 hl.bind(mainMod .. " + down", hl.dsp.focus({direction = "down"}))
 
+--- MOVE WINDOWS ---
+hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.move({direction = "left"}))
+hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move({direction = "right"}))
+hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.move({direction = "up"}))
+hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.move({direction = "down"}))
+
 --- SWITCH WORKSPACES ---
 for i = 1,10 do
   local key = i % 10
@@ -305,6 +312,11 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 --- SCREENSHOT ---
 hl.bind("Print", hl.dsp.exec_cmd([[hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' | grim -g - - | wl-copy]]))
 
+
+--- CLAMSHELL MODE ---
+hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("~/.local/bin/clamshell close"), { locked = true })
+hl.bind("switch:off:Lid Switch", hl.dsp.exec_cmd("~/.local/bin/clamshell open"), { locked = true })
+
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------
@@ -317,20 +329,20 @@ local suppressMaximizeRule = hl.window_rule({
 })
 -- suppressMaximizeRule:set_enabled(false)
 
---hl.window_rule({
---    -- Fix some dragging issues with XWayland
---    name  = "fix-xwayland-drags",
---    match = {
---        class      = "^$",
---        title      = "^$",
---        xwayland   = true,
---        float      = true,
---        fullscreen = false,
---        pin        = false,
---    },
---
---    no_focus = true,
---})
+hl.window_rule({
+    -- Fix some dragging issues with XWayland
+    name  = "fix-xwayland-drags",
+    match = {
+        class      = "^$",
+        title      = "^$",
+        xwayland   = true,
+        float      = true,
+        fullscreen = false,
+        pin        = false,
+    },
+
+    no_focus = true,
+})
 hl.window_rule({
     name  = "move-hyprland-run",
     match = { class = "hyprland-run" },

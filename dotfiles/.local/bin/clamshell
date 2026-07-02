@@ -1,0 +1,13 @@
+#!/bin/bash
+STATE=$1
+EXTERNAL_CONNECTED=$(hyprctl monitors | grep -c "^Monitor DP-1")
+
+if [ "$STATE" == "close" ]; then
+	if [ "$EXTERNAL_CONNECTED" -ge 1 ]; then
+		hyprctl eval 'hl.monitor({output = "eDP-1", disabled = true})'
+	else
+		systemctl suspend
+	fi
+else
+	hyprctl eval 'hl.monitor({output = "eDP-1", mode = "3000x2000@60.00", position = "0x0", disabled = false, scale = 2})'
+fi
