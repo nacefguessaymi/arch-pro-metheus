@@ -44,6 +44,13 @@ language-servers = ["tinymist"]
 
 [[language]]
 name = "bash"
+language-servers = ["bash-language-server"]
+formatter = { command = "shfmt" }
+auto-format = true
+
+[language-server.bash-language-server]
+command = "bash-language-server"
+args = ["start"]
 
 [[language]]
 name = "bibtex"
@@ -65,3 +72,7 @@ name = "latex"
 
 [[language]]
 name = "yaml"
+
+[[language]]
+name = "ini"
+file-types = ["ini", "cfg", "conf", "toml.bak", { glob = "isyncrc" }]

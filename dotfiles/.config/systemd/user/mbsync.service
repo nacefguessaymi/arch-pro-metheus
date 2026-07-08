@@ -1,0 +1,6 @@
+[Unit]
+Description=mbsync all accounts
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/mbsync -a
