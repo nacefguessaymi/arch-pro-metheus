@@ -1,0 +1,47 @@
+#!/bin/bash
+# fix-pixi-terminfo — Populate ~/.terminfo with a terminfo entry compiled
+# against the conda-forge ncurses build's hash-directory scheme.
+#
+# Why: conda-forge's ncurses (used by pixi/conda envs) hashes terminfo
+# subdirectories differently than Arch's system ncurses (e.g. "78/" vs "x/"
+# for xterm-ghostty). This means pixi envs can't see Arch's terminfo entries
+# even though they're readable and present — clear/tput/infocmp fail with
+# "terminals database is inaccessible" despite correct permissions.
+#
+# Fix: compile the terminfo source with the PIXI ENV's own `tic` (not the
+# system one) so the compiled entry lands in the hash layout that specific
+# ncurses build expects to find. $HOME/.terminfo is a per-user path checked
+# by every pixi/conda env, so this only needs to run once per machine.
+#
+# Requires: at least one pixi environment already created (borrows its `tic`).
+# Run this after first pixi env setup, e.g. from the dotfiles/AUR stage.
+
+set -euo pipefail
+
+TERM_NAME="${1:-$TERM}"
+PIXI_ENV_BIN="${PIXI_TIC_BIN:-}"
+
+if [[ -z "$PIXI_ENV_BIN" ]]; then
+    # Fall back to searching common pixi project locations for a tic binary
+    PIXI_ENV_BIN=$(find "$HOME/repos" -maxdepth 5 -path '*/.pixi/envs/*/bin/tic' -print -quit 2>/dev/null || true)
+fi
+
+if [[ -z "$PIXI_ENV_BIN" || ! -x "$PIXI_ENV_BIN" ]]; then
+    echo "fix-pixi-terminfo: no pixi env 'tic' binary found." >&2
+    echo "  Activate a pixi shell first, or pass one explicitly:" >&2
+    echo "    PIXI_TIC_BIN=/path/to/.pixi/envs/default/bin/tic fix-pixi-terminfo" >&2
+    exit 1
+fi
+
+echo "Using tic: $PIXI_ENV_BIN"
+echo "Compiling terminfo entry: $TERM_NAME"
+
+mkdir -p "$HOME/.terminfo"
+
+TMPFILE=$(mktemp /tmp/pixi-terminfo.XXXXXX)
+trap 'rm -f "$TMPFILE"' EXIT
+
+infocmp -x "$TERM_NAME" > "$TMPFILE"
+"$PIXI_ENV_BIN" -x -o "$HOME/.terminfo" "$TMPFILE"
+
+echo "Done. Verify with: infocmp $TERM_NAME"
