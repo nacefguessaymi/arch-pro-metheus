@@ -1,0 +1,14 @@
+#!/bin/bash
+MARKER="$HOME/.cache/mail-notify-last"
+mkdir -p "$HOME/.cache"
+[ -f "$MARKER" ] || touch -d "5 minutes ago" "$MARKER"
+
+/usr/bin/mbsync -a
+
+find "$HOME/mail" -type f -path "*/new/*" -newer "$MARKER" 2>/dev/null | while read -r f; do
+	python3 ~/.local/bin/decode_email "$f"
+done | while IFS=$'\x1f' read -r from subject; do
+	notify-send "New mail from $from" "$subject"
+done
+
+touch "$MARKER"
