@@ -3,4 +3,4 @@ Description=mbsync all accounts
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/mbsync -a
+ExecStart=/home/nacef/.local/bin/mail_notify

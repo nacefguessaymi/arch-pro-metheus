@@ -23,6 +23,12 @@ hl.monitor({output = "eDP-1", mode = "3000x2000", position = "0x0", scale = 2})
 --- WORK PEN SCREEN ---
 hl.monitor({output = "desc:ASUSTek COMPUTER INC VP327Q", mode = "2560x1440@59.95", position = "-2560x0", scale = 1 })
 
+--- WORK MEETING ROOM 1 ---
+hl.monitor({output = "desc:Panasonic Industry Company Panasonic-TV 0x01010101", mode = "1920x1080@60", position = "-1920x0", scale = 1.2 })
+
+--- WORK MEETING ROOM 2 ---
+hl.monitor({output = "desc:Panasonic Industry Company TH-42LFE7 0x01010101", mode = "1920x1080@60", position = "-1920x0", scale = 1.2 })
+
 --- HOME MONITOR ---
 hl.monitor({output = "desc:ASUSTek COMPUTER INC PA32QCV T7LMSV00900", mode = "3008x1692@59.96700", position = "1500x0", scale = 1})
 
