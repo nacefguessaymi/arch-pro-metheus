@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.sock"
+if ! ssh-add -l &>/dev/null; then
+    rm -f "$SSH_AUTH_SOCK"
+    eval "$(ssh-agent -s -a "$SSH_AUTH_SOCK")"
+    for key in ~/.ssh/keys/*; do
+        [[ "$key" != *pub ]] && ssh-add "$key"
+    done
+fi
