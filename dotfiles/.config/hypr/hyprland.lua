@@ -30,7 +30,7 @@ hl.monitor({output = "desc:Panasonic Industry Company Panasonic-TV 0x01010101", 
 hl.monitor({output = "desc:Panasonic Industry Company Panasonic-TV 0x01010101", mode = "1920x1080@60", position = "-1920x0", scale = 1.5 })
 
 --- HOME MONITOR ---
-hl.monitor({output = "desc:ASUSTek COMPUTER INC PA32QCV T7LMSV00900", mode = "3008x1692@59.96700", position = "1500x0", scale = 1})
+hl.monitor({output = "desc: ASUSTek COMPUTER INC PA32QCV T7LMSV009006", mode = "3008x1692@59.96700", position = "1500x0", scale = 1})
 
 --- FALLBACK ---
 hl.monitor({output = "", mode = "preferred", position = "auto", scale = "auto"})
@@ -394,6 +394,31 @@ hl.on(
     hl.exec_cmd("~/.local/bin/start-ssh-agent")
   end
 )
-hl.on("monitor.removed", function()
+
+local monitor_desc = " ASUSTek COMPUTER INC PA32QCV T7LMSV009006"
+local is_home_mon_connected = false
+
+local function set_ckb_next_state(should_run)
+  if should_run and not is_home_mon_connected then
+    is_home_mon_connected = true
+    hl.exec_cmd("systemctl --user start ckb-next-daemon")
+  elseif not should_run and is_home_mon_connected then
+    is_home_mon_connected = false
+    hl.exec_cmd("systemctl --user stop ckb-next-daemon")
+  end
+end
+
+hl.on("monitor.added", function(mon)
+  if mon.description == monitor_desc then
+    set_ckb_next_state(true)
+  end
+end)
+
+hl.on("monitor.removed", function(mon)
+  if mon.description == monitor_desc then
+    set_ckb_next_state(false)
+  end
+end)
+hl.on("monitor.removed", function(any_mon)
     hl.exec_cmd("pkill waybar; sleep 0.5; waybar")
 end)
