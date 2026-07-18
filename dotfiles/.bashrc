@@ -159,3 +159,4 @@ source "$OSH"/oh-my-bash.sh
 fastfetch
 eval "$(starship init bash)"
 export PATH="/home/nacef/.pixi/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

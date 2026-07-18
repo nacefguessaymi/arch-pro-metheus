@@ -27,7 +27,7 @@ hl.monitor({output = "desc:ASUSTek COMPUTER INC VP327Q", mode = "2560x1440@59.95
 hl.monitor({output = "desc:Panasonic Industry Company Panasonic-TV 0x01010101", mode = "1920x1080@60", position = "-1920x0", scale = 1.2 })
 
 --- WORK MEETING ROOM 2 ---
-hl.monitor({output = "desc:Panasonic Industry Company TH-42LFE7 0x01010101", mode = "1920x1080@60", position = "-1920x0", scale = 1.2 })
+hl.monitor({output = "desc:Panasonic Industry Company Panasonic-TV 0x01010101", mode = "1920x1080@60", position = "-1920x0", scale = 1.5 })
 
 --- HOME MONITOR ---
 hl.monitor({output = "desc:ASUSTek COMPUTER INC PA32QCV T7LMSV00900", mode = "3008x1692@59.96700", position = "1500x0", scale = 1})
@@ -43,7 +43,7 @@ hl.monitor({output = "", mode = "preferred", position = "auto", scale = "auto"})
 hl.env("XCURSOR_SIZE", "12")
 hl.env("HYPRCURSOR_SIZE", "12")
 hl.env("AQ_DRM_DEVICES", "/dev/dri/card1")
-
+hl.env("SSH_AUTH_SOCK", os.getenv("XDG_RUNTIME_DIR") .. "/ssh-agent.sock", true)
 
 ---------------------
 --- LOOK AND FEEL ---
@@ -391,6 +391,7 @@ hl.on(
     hl.exec_cmd("swaync")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
+    hl.exec_cmd("~/.local/bin/start-ssh-agent")
   end
 )
 hl.on("monitor.removed", function()
