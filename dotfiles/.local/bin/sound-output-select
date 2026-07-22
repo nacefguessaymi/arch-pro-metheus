@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# List sinks as "index: description", pick one with wofi, set as default,
+# and move all currently active streams onto it.
+
+mapfile -t sinks < <(pactl list sinks | awk -F': ' '
+  /^Sink #/ {idx=$2}
+  /Description:/ {desc=$0; sub(/^[[:space:]]*Description:[[:space:]]*/, "", desc); print idx ": " desc}
+')
+
+choice=$(printf '%s\n' "${sinks[@]}" | wofi --dmenu --prompt "Output device")
+[ -z "$choice" ] && exit 0
+
+sink_index="${choice%%:*}"
+sink_name=$(pactl list short sinks | awk -v i="$sink_index" '$1==i {print $2}')
+
+pactl set-default-sink "$sink_name"
+
+# move existing playback streams to the new sink
+pactl list short sink-inputs | awk '{print $1}' | while read -r input; do
+    pactl move-sink-input "$input" "$sink_name"
+done

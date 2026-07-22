@@ -71,7 +71,8 @@
         "format-muted": "<span size='12pt'>󰝟</span>",
         "scroll-step": 2,
         "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-        "on-click-right": "pavucontrol -t 4",
+        "on-click-right": "~/.local/bin/sound-output-select",
+        "on-click-middle": "pavucontrol -t 4",
         "format-icons": {
            "headphone": "",
             "hands-free": "",
@@ -135,10 +136,10 @@
         "interval": 20,
         "full-at": 100,
         "tooltip": true,
-        "format-full": "",
+        "format-full": " {capacity}%",
         "format": "{icon} {capacity}%",
         "format-time": "{H}:{M:02}",
-        "format-charging": " {capacity}% ({time})",
+        "format-charging": "⚡︎ {capacity}% ({time})",
         "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂂", "󰁹"],
         "states": {
             "warning": 30,
